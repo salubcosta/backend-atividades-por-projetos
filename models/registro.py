@@ -8,7 +8,7 @@ class Registro(Base):
 
     id          = Column(Integer, primary_key=True)
     descricao   = Column(String(500), nullable=False)
-    data        = Column(DateTime, default=datetime.now(), nullable=False)
+    data        = Column(DateTime, default=datetime.now, nullable=False)
     projeto_id  = Column(Integer, ForeignKey("projeto.id"), nullable=False)
 
     # Relacionamento: Infomando para sqlalchemy que a tabela registro, possui relacionamento com projeto
