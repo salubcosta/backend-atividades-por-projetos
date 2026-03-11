@@ -4,19 +4,6 @@ from database.database import Base
 from datetime import datetime
 
 class Registro(Base):
-    """
-    Model Registro:
-        Responsável por mapear tabela de Registro
-
-    Variáveis:
-        id: pk da tabela registro
-        descricao: breve descrição do registro
-        data: Data e hora que o registro foi inserido
-        projeto_id: Chave estrangeira da tabela projeto(id)
-    
-    Relacionamento:
-        projeto: Os registros obrigatoriamente dependem de um projeto
-    """
     __tablename__ = "registro"
 
     id          = Column(Integer, primary_key=True)
@@ -26,3 +13,20 @@ class Registro(Base):
 
     # Relacionamento: Infomando para sqlalchemy que a tabela registro, possui relacionamento com projeto
     projeto     = relationship("Projeto", back_populates="registros")
+
+    def __init__(self, descricao: str, projeto_id: int, data: DateTime = datetime.now()):
+        """
+        Responsável por mapear tabela de Registro
+
+        Arguments:
+            id: pk da tabela registro
+            descricao: breve descrição do registro
+            data: Data e hora que o registro foi inserido
+            projeto_id: Chave estrangeira da tabela projeto(id)
+    
+        Relationship:
+            projeto: Os registros obrigatoriamente dependem de um projeto
+        """
+        self.descricao = descricao
+        self.projeto_id = projeto_id
+        self.data = data
