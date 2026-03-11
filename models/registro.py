@@ -14,7 +14,7 @@ class Registro(Base):
     # Relacionamento: Infomando para sqlalchemy que a tabela registro, possui relacionamento com projeto
     projeto     = relationship("Projeto", back_populates="registros")
 
-    def __init__(self, descricao: str, projeto_id: int, data: DateTime = datetime.now()):
+    def __init__(self, descricao: str, projeto_id: int, data: DateTime = None):
         """
         Responsável por mapear tabela de Registro
 
@@ -29,4 +29,4 @@ class Registro(Base):
         """
         self.descricao = descricao
         self.projeto_id = projeto_id
-        self.data = data
+        self.data = data or datetime.now()
