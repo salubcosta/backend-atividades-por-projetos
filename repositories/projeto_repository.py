@@ -41,7 +41,7 @@ class ProjetoRepository:
         with Session() as session:
             return session.query(Projeto).all()
         
-    def busar_por_id(self, projeto_id: int):
+    def buscar_por_id(self, projeto_id: int):
         with Session() as session:
             return session.query(Projeto).filter(Projeto.id == projeto_id).first()
     
