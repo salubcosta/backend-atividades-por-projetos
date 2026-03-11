@@ -1,0 +1,28 @@
+from sqlalchemy import Column, Integer, String, ForeignKey, DateTime
+from sqlalchemy.orm import relationship
+from database.database import Base
+from datetime import datetime
+
+class Registro(Base):
+    """
+    Model Registro:
+        Responsável por mapear tabela de Registro
+
+    Variáveis:
+        id: pk da tabela registro
+        descricao: breve descrição do registro
+        data: Data e hora que o registro foi inserido
+        projeto_id: Chave estrangeira da tabela projeto(id)
+    
+    Relacionamento:
+        projeto: Os registros obrigatoriamente dependem de um projeto
+    """
+    __tablename__ = "registro"
+
+    id          = Column(Integer, primary_key=True)
+    descricao   = Column(String(500), nullable=False)
+    data        = Column(DateTime, default=datetime.now(), nullable=False)
+    projeto_id  = Column(Integer, ForeignKey("projeto.id"), nullable=False)
+
+    # Relacionamento: Infomando para sqlalchemy que a tabela registro, possui relacionamento com projeto
+    projeto     = relationship("Projeto", back_populates="registros")
