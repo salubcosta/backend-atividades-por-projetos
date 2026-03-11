@@ -31,7 +31,7 @@ class CategoriaRepository:
 
             try:
                 session.commit()
-                session.refresh(Categoria)
+                session.refresh(categoria)
                 return categoria
             except IntegrityError:
                 session.rollback()
