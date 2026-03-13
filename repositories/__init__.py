@@ -1,0 +1,3 @@
+from repositories.categoria_repository import CategoriaRepository
+from repositories.projeto_repository import ProjetoRepository
+from repositories.registro_repository import RegistroRepository
