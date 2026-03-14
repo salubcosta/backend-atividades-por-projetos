@@ -117,6 +117,12 @@ class ProjetoRepository:
             caso encontre registro. Retorna 1, caso não encontre, retorna 0.
         """
         with Session() as session:
-            count = session.query(Projeto).filter(Projeto.id == projeto_id).delete()
+            projeto = session.query(Projeto).filter(Projeto.id == projeto_id).first()
+
+            if not projeto:
+                return 0
+            
+            session.delete(projeto)
             session.commit()
-            return count
+            return 1
+            
