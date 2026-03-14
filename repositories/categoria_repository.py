@@ -1,6 +1,6 @@
 from sqlalchemy.exc import IntegrityError
 from database.database import Session
-from models import Categoria
+from models import Categoria, Projeto
 
 class CategoriaRepository:
     """
@@ -101,6 +101,14 @@ class CategoriaRepository:
             booleano, 0 equivale a False. 
         """
         with Session() as session:
-            count = session.query(Categoria).filter(Categoria.id == categoria_id).delete()
+            projeto = session.query(Projeto).filter(Projeto.categoria_id == categoria_id).first()
+            if projeto:
+                return 99
+            
+            categoria = session.query(Categoria).filter(Categoria.id == categoria_id).first()
+
+            if not categoria:
+                return 0
+            session.delete(categoria)
             session.commit()
-            return count
+            return 1
