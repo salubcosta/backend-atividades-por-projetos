@@ -39,6 +39,8 @@ class CategoriaService:
     def deletar(self, categoria_id: int):
         """Deleta uma categoria pelo ID"""
         count = respository.deletar_categoria(categoria_id=categoria_id)
-        if not count:
+        if count == 0:
             return {"erro": "Categoria não encontrada"}, 404
+        elif count == 99:
+            return {"erro": "Essa categoria possui projetos filhos"}, 409
         return {"mensagem": "Categoria deletada com sucesso"}, 200
