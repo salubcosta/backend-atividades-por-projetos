@@ -16,5 +16,7 @@ from schemas.registro_schema import (
     RegistroCreateSchema,
     RegistroUpdateSchema,
     RegistroResponseSchema,
-    RegistroListResponseSchema
+    RegistroListResponseSchema,
+    RegistroProjetoGetId,
+    RegistroGetId
 )
