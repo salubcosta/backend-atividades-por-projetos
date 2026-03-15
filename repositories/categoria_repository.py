@@ -96,9 +96,8 @@ class CategoriaRepository:
             categoria_id: PK de categoria
 
         Return:
-            count: Retona a quantidade de registros afetados. Como estamos deletando por id,
-            caso encontre registro. Retorna 1, caso não encontre, retorna 0. E em contexto
-            booleano, 0 equivale a False. 
+            count: retornar 99, caso exista algum projeto dependente da categoria. Senão,
+            retorna 0, caso a categoria não exista ou 1, caso exista.
         """
         with Session() as session:
             projeto = session.query(Projeto).filter(Projeto.categoria_id == categoria_id).first()
