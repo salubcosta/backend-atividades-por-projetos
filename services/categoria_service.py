@@ -56,7 +56,7 @@ class CategoriaService:
         """
         categorias = respository.listar_categorias()
         return {
-            "categorisa": [CategoriaResponseSchema.model_validate(c).model_dump() for c in categorias],
+            "categorias": [CategoriaResponseSchema.model_validate(c).model_dump() for c in categorias],
             "total": len(categorias)
         }, 200
     
