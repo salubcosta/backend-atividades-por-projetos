@@ -51,12 +51,7 @@ class RegistroService:
                 1 - Projeto não foi encontrado, 404
                 2 - Registro não foi encontrado, 404
                 3 - Mensagem de sucesso com registro atualizado, 200
-        """
-        repo_projeto = ProjetoRepository()
-        projeto = repo_projeto.buscar_por_id(body.projeto_id)
-        if not projeto:
-            return {"erro": "Projeto não encontrado"}, 404
-        
+        """        
         resultado = repository.atualizar(
             registro_id=registro_id,
             descricao=body.descricao
