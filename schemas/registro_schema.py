@@ -9,7 +9,6 @@ class RegistroCreateSchema(BaseModel):
 
 class RegistroUpdateSchema(BaseModel):
     descricao: str
-    projeto_id: int
 
 class RegistroResponseSchema(BaseModel):
     id: int
