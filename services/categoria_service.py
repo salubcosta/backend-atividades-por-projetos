@@ -1,7 +1,7 @@
 from repositories import CategoriaRepository
 from schemas import CategoriaCreateSchema, CategoriaUpdateSchema, CategoriaResponseSchema, CategoriaGetId
 
-respository = CategoriaRepository()
+repository = CategoriaRepository()
 
 class CategoriaService:
     """
@@ -22,7 +22,7 @@ class CategoriaService:
             JSON: Contendo mensagem de erro, com status code 409 (conflito)
             ou recurso criado com status code 200
         """
-        resultado = respository.criar_categoria(nome=form.nome)
+        resultado = repository.criar_categoria(nome=form.nome)
         if not resultado:
             # https://developer.mozilla.org/pt-BR/docs/Web/HTTP/Reference/Status#respostas_de_erro_do_cliente 
             # 409 = conflito
@@ -41,7 +41,7 @@ class CategoriaService:
             JSON: Contendo mensagem de erro caso não econtre a categoria 
             e objeto de categoria respeitando o CategoriaResponseSchema
         """
-        resultado = respository.atualizar(categoria_id=id, nome=body.nome)
+        resultado = repository.atualizar(categoria_id=id, nome=body.nome)
         if not resultado:
             return {"erro": "Categoria não encontrada"}, 404
         return CategoriaResponseSchema.model_validate(resultado).model_dump(), 200
@@ -54,7 +54,7 @@ class CategoriaService:
             JSON: Contendo a chave de categoria com uma lista de categorias e 
             uma chave total contendo a quantidade de categorias retornada.
         """
-        categorias = respository.listar_categorias()
+        categorias = repository.listar_categorias()
         return {
             "categorias": [CategoriaResponseSchema.model_validate(c).model_dump() for c in categorias],
             "total": len(categorias)
@@ -71,7 +71,7 @@ class CategoriaService:
             JSON: Contendo mensagem de erro caso não encontra da categoria
             ou o objeto de categoria respeitando o CategoriaResponseSchema
         """
-        resultado = respository.buscar_por_id(categoria_id=categoria_id)
+        resultado = repository.buscar_por_id(categoria_id=categoria_id)
         if not resultado:
             return {"erro": "Categoria não encontrada"}, 404
         return CategoriaResponseSchema.model_validate(resultado).model_dump(), 200
@@ -89,7 +89,7 @@ class CategoriaService:
                 2 - há projetos dependentes, status code, 409
                 3 - mensagem de sucesso, status code, 200.
         """
-        count = respository.deletar_categoria(categoria_id=categoria_id)
+        count = repository.deletar_categoria(categoria_id=categoria_id)
         if count == 0:
             return {"erro": "Categoria não encontrada"}, 404
         elif count == 99:
